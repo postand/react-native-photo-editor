@@ -737,7 +737,11 @@ public class PhotoEditorActivity extends AppCompatActivity implements View.OnCli
 
     private void startCropping() {
         System.out.println(selectedImagePath);
-        Uri uri = Uri.fromFile(new File(selectedImagePath));
+        String realPath = selectedImagePath;
+        if(selectedImagePath.startsWith("file://")){
+            realPath = selectedImagePath.substring(7);
+        }
+        Uri uri = Uri.fromFile(new File(realPath));
         UCrop.Options options = new UCrop.Options();
         options.setCompressionFormat(Bitmap.CompressFormat.JPEG);
         options.setCompressionQuality(100);
